@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AI Outfit Roaster - Register</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: black;
+        }
+
+        /* Explosive fire particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, orange, red);
+            width: 10px;
+            height: 10px;
+            opacity: 0.8;
+            animation: fly linear infinite;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(calc(var(--x) * 1px), calc(var(--y) * 1px)) scale(0.2);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: bold;
+            color: red;
+            margin: 10px 0;
+            animation: shake 0.5s infinite alternate, glow 1s infinite alternate;
+            z-index: 2;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            margin: 10px 0;
+            animation: bounce 1.2s infinite;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* Shake animation for the red text */
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-15px);
+            }
+
+            50% {
+                transform: translateX(15px);
+            }
+
+            75% {
+                transform: translateX(-15px);
+            }
+
+            100% {
+                transform: translateX(15px);
+            }
+        }
+
+        /* Glow effect for red text */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px red;
+            }
+
+            50% {
+                text-shadow: 0 0 25px orange, 0 0 50px red;
+            }
+
+            100% {
+                text-shadow: 0 0 5px red;
+            }
+        }
+
+        /* Bounce animation for subtitle */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>So Foolish</h1>
+    <h2>Already Registered for</h2>
+    <h1>THE STUPID HACKATHON</h1>
+
+    <script>
+        // Generate explosive particles
+        for (let i = 0; i < 50; i++) {
+            let p = document.createElement('div');
+            p.className = 'particle';
+            p.style.setProperty('--x', Math.random() * 800 - 400);
+            p.style.setProperty('--y', Math.random() * 600 - 300);
+            p.style.left = '50%';
+            p.style.top = '50%';
+            document.body.appendChild(p);
+        }
+    </script>
+</body>
+
+</html>

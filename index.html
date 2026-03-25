@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AI Outfit Roaster</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6f0;
+            /* very light pink */
+            position: relative;
+        }
+
+        /* 🔵 Floating circles */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: floatCircle linear infinite;
+        }
+
+        @keyframes floatCircle {
+            0% {
+                transform: translateY(100vh);
+            }
+
+            100% {
+                transform: translateY(-100px);
+            }
+        }
+
+        /* 🔹 Card */
+        .card {
+            background: white;
+            padding: 60px 40px;
+            width: 420px;
+            height: 600px;
+            /* bigger length */
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            border: 4px solid transparent;
+            background-clip: padding-box;
+            box-shadow: 0 0 20px rgba(200, 200, 200, 0.3);
+        }
+
+        /* 🔹 Silver shimmer border */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -4px;
+            bottom: -4px;
+            left: -4px;
+            right: -4px;
+            border-radius: 24px;
+            background: linear-gradient(270deg, #c0c0c0, #e0e0e0, #c0c0c0, #e0e0e0);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: silverShimmer 3s linear infinite;
+        }
+
+        @keyframes silverShimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        /* 🔹 Upload box */
+        #uploadBox {
+            width: 100%;
+            height: 150px;
+            border: 2px dashed #c0c0c0;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #555;
+            position: relative;
+        }
+
+        #uploadBox.uploading {
+            font-style: italic;
+            color: #ff4d4d;
+        }
+
+        #uploadInput {
+            display: none;
+        }
+
+        .btn {
+            padding: 12px;
+            width: 100%;
+            background: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #5548e6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating circles -->
+    <script>
+        const colors = ["#ff9999", "#ffcc99", "#99ccff", "#ccffcc", "#ffff99", "#ffb3ff"];
+        for (let i = 0; i < 20; i++) {
+            const circle = document.createElement("div");
+            circle.className = "circle";
+            let size = 20 + Math.random() * 50;
+            circle.style.width = size + "px";
+            circle.style.height = size + "px";
+            circle.style.left = Math.random() * window.innerWidth + "px";
+            circle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            circle.style.animationDuration = (5 + Math.random() * 5) + "s";
+            document.body.appendChild(circle);
+        }
+    </script>
+
+    <!-- Main card -->
+    <div class="card">
+        <h2>Drop the outfit 👕</h2>
+
+        <div id="uploadBox" onclick="document.getElementById('uploadInput').click()">
+            Click here to upload
+        </div>
+        <input type="file" id="uploadInput" accept="image/*">
+
+        <button class="btn" onclick="goResult()">Roast Me</button>
+    </div>
+
+    <script>
+        const uploadBox = document.getElementById("uploadBox");
+        const uploadInput = document.getElementById("uploadInput");
+
+        uploadInput.addEventListener("change", function () {
+            if (uploadInput.files.length > 0) {
+                uploadBox.innerText = "Analysing...";
+                uploadBox.classList.add("uploading");
+
+                // Save image temporarily in localStorage for result page
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    localStorage.setItem("uploadedImage", e.target.result);
+                };
+                reader.readAsDataURL(uploadInput.files[0]);
+            }
+        });
+
+        function goResult() {
+            if (localStorage.getItem("uploadedImage")) {
+                window.location.href = "result.html";
+            } else {
+                alert("Please upload an image first!");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

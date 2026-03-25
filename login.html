@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login - AI Outfit Roaster</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #000;
+            /* Black background */
+        }
+
+        /* 🔥 CARD */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            /* semi-transparent white for glow effect */
+            padding: 50px 40px;
+            width: 400px;
+            border-radius: 25px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(15px);
+            border: 2px solid #ff4d4d;
+            box-shadow: 0 0 40px #ff4d4d;
+        }
+
+        h1 {
+            color: #ff4d4d;
+            font-size: 32px;
+            margin-bottom: 30px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 2px solid #ff4d4d;
+            font-size: 16px;
+            outline: none;
+            background: #111;
+            /* dark input */
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 10px #6c63ff;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn {
+            background: #ff4d4d;
+            color: white;
+        }
+
+        .login-btn:hover {
+            background: #e60000;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #ff4d4d;
+        }
+
+        .register-btn {
+            background: #6c63ff;
+            color: white;
+        }
+
+        .register-btn:hover {
+            background: #5548e6;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #6c63ff;
+        }
+
+        /* Floating emojis */
+        .emoji {
+            position: absolute;
+            font-size: 22px;
+            opacity: 0.8;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh);
+            }
+
+            100% {
+                transform: translateY(-100px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating emojis -->
+    <script>
+        const emojis = ["🔥", "💀", "😈", "👀", "⚡"];
+        for (let i = 0; i < 20; i++) {  // 20 floating emojis
+            const e = document.createElement("div");
+            e.className = "emoji";
+            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.left = Math.random() * 100 + "vw";
+            e.style.animationDuration = (4 + Math.random() * 4) + "s";
+            document.body.appendChild(e);
+        }
+    </script>
+
+    <!-- Main Card -->
+    <div class="card">
+        <h1>Enter... if You DARE!!! 😈</h1>
+
+        <input type="text" placeholder="Enter your name">
+
+        <button class="btn login-btn" onclick="showConfirm()">Login</button>
+        <button class="btn register-btn" onclick="goRegister()">Register</button>
+
+        <!-- Hidden confirm button -->
+        <button id="confirmBtn" class="btn login-btn" style="display:none;" onclick="goIndex()">Are you sure?</button>
+    </div>
+
+    <script>
+        function showConfirm() {
+            document.getElementById("confirmBtn").style.display = "block";
+        }
+
+        function goIndex() {
+            window.location.href = "index.html";
+        }
+
+        function goRegister() {
+            window.location.href = "register.html";
+        }
+    </script>
+
+</body>
+
+</html>
